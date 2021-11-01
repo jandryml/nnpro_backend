@@ -352,3 +352,17 @@ databaseChangeLog:
             constraintName: uq_users_username
             tableName: users
   #</editor-fold>
+  - changeSet:
+      id: 2
+      author: drymlj
+      changes:
+        -  dropColumn:
+             columnName:  group
+             tableName:  users
+        - addColumn:
+            tableName: users
+            columns:
+              - column:
+                  name: user_group
+                  type: varchar(50)
+                  defaultValue: NONE
