@@ -28,6 +28,7 @@ dependencies {
 
     implementation("org.liquibase:liquibase-core:4.5.0")
     implementation("org.postgresql:postgresql")
+    implementation("net.logstash.logback:logstash-logback-encoder:6.6")
 
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
