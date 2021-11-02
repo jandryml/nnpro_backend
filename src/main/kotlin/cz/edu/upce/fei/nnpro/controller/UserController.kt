@@ -5,8 +5,8 @@ import cz.edu.upce.fei.nnpro.dto.ResponseDto
 import cz.edu.upce.fei.nnpro.dto.UserDto
 import cz.edu.upce.fei.nnpro.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.http.ResponseEntity
 import org.springframework.http.HttpHeaders
+import org.springframework.http.ResponseEntity
 import org.springframework.orm.jpa.JpaObjectRetrievalFailureException
 import org.springframework.web.bind.annotation.*
 
@@ -47,4 +47,9 @@ class UserController(
         }
     }
 
+    //TODO add validation to check rights to edit user
+    @PostMapping
+    fun edit(@RequestBody userDto: UserDto): ResponseEntity<Any> {
+        return ResponseEntity.ok(userService.save(userDto))
+    }
 }

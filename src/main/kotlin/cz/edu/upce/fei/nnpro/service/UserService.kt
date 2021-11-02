@@ -3,6 +3,7 @@ package cz.edu.upce.fei.nnpro.service
 import cz.edu.upce.fei.nnpro.dto.JwtResponseDto
 import cz.edu.upce.fei.nnpro.dto.ResponseDto
 import cz.edu.upce.fei.nnpro.dto.UserDto
+import cz.edu.upce.fei.nnpro.model.Rail
 import cz.edu.upce.fei.nnpro.model.Role
 import cz.edu.upce.fei.nnpro.model.User
 import cz.edu.upce.fei.nnpro.repository.UserRepository
@@ -74,4 +75,7 @@ class UserService {
 	fun getLoggedUser(): UserDto? {
 		return getByUsername(SecurityContextHolder.getContext().authentication.name).toDto()
 	}
+
+	fun save(userDto: UserDto) = userRepository.save(userDto.toModel())
+
 }
