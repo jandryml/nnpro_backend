@@ -1,10 +1,6 @@
 package cz.edu.upce.fei.nnpro.model
 
-import cz.edu.upce.fei.nnpro.dto.TrainRouteDto
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import javax.persistence.*
 
 @Entity
 class TrainRoute(
@@ -12,8 +8,9 @@ class TrainRoute(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = Long.MIN_VALUE,
     var trainCode: String = "",
+    @OneToMany(cascade = [CascadeType.ALL], orphanRemoval = true)
+    @JoinColumn(name = "train_route_id")
+    var sections: List<TrainRouteSection> =  ArrayList(),
     //TODO asi nebude potreba, stacil by check, jestli jsou nejake Incidenty
     var closure: Boolean = false
-) {
-    fun toDto() = TrainRouteDto(id, trainCode, closure)
-}
+)

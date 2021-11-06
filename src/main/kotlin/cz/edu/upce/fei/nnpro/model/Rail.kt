@@ -1,6 +1,5 @@
 package cz.edu.upce.fei.nnpro.model
 
-import cz.edu.upce.fei.nnpro.dto.RailDto
 import javax.persistence.*
 
 @Entity
@@ -17,11 +16,4 @@ class Rail(
     @JoinColumn(name = "target_station_id")
     var targetStation: Station? = null,
     var enabled: Boolean = true
-) {
-    fun toDto(): RailDto {
-        return RailDto(
-            id, code, name, sourceStation?.id ?: Long.MIN_VALUE,
-            targetStation?.id ?: Long.MIN_VALUE, enabled
-        )
-    }
-}
+)
