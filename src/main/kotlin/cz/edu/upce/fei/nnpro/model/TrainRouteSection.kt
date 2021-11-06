@@ -9,7 +9,7 @@ class TrainRouteSection(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = Long.MIN_VALUE,
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "rail_id")
-    var rail: Rail? = null,
+    @JoinColumn(name = "station_id")
+    var station: Station? = null,
     var routeOrder: Int = Int.MIN_VALUE
 )

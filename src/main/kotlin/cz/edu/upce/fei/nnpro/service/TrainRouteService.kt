@@ -6,9 +6,16 @@ import org.springframework.stereotype.Service
 
 @Service
 class TrainRouteService(
-    private val trainRouteRepository: TrainRouteRepository
+    private val trainRouteRepository: TrainRouteRepository,
+    private val railService: RailService
 ) {
-    fun save(trainRoute: TrainRoute) = trainRouteRepository.save(trainRoute)
+    fun save(trainRoute: TrainRoute): TrainRoute {
+        trainRoute.sections.forEachIndexed { idx, it ->
+            if (trainRoute.sections.lastIndex == idx) return@forEachIndexed
+            railService.getRailBetween(it.station!!.id, trainRoute.sections[idx].id)
+        }
+        return trainRouteRepository.save(trainRoute)
+    }
 
     fun getById(id: Long) = trainRouteRepository.getById(id)
 

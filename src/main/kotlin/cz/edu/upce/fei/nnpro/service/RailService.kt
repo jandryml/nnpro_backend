@@ -16,5 +16,8 @@ class RailService(
 
     fun delete(rail: Rail) = railRepository.delete(rail)
 
-    fun deleteById(id: Long)= railRepository.deleteById(id)
+    fun deleteById(id: Long) = railRepository.deleteById(id)
+
+    fun getRailBetween(sourceStationId: Long, targetStationId: Long) =
+        railRepository.getRailBetween(sourceStationId, targetStationId)
 }
