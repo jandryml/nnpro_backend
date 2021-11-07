@@ -3,8 +3,8 @@ databaseChangeLog:
   - changeSet:
       id: 1
       author: drymlj
+      comment: ddl 1 - init DDL changeset
       changes:
-
         - createTable:
             tableName: users
             columns:
@@ -214,7 +214,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: rail_id
+                  name: station_id
                   type: BIGINT
                   constraints:
                     nullable: false
@@ -273,13 +273,13 @@ databaseChangeLog:
             validate: true
 
         - addForeignKeyConstraint:
-            baseColumnNames: rail_id
+            baseColumnNames: station_id
             baseTableName: train_route_section
             constraintName: fk_trs_rail
             onDelete: NO ACTION
             onUpdate: NO ACTION
             referencedColumnNames: id
-            referencedTableName: rail
+            referencedTableName: station
             validate: true
 
         - addForeignKeyConstraint:
@@ -355,6 +355,7 @@ databaseChangeLog:
   - changeSet:
       id: 2
       author: drymlj
+      comment: ddl 2 - user column change
       changes:
         -  dropColumn:
              columnName:  group
