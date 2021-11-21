@@ -30,4 +30,7 @@ class SubstituteRouteController(
 
     @DeleteMapping
     fun delete(@RequestBody substituteRoute: SubstituteRoute) = substituteRouteService.delete(substituteRoute)
+
+    @DeleteMapping("/{id}")
+    fun deleteById(@PathVariable id: Long) = substituteRouteService.delete(substituteRouteService.getById(id))
 }
