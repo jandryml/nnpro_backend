@@ -30,4 +30,7 @@ class TrainRouteController(
 
     @DeleteMapping
     fun delete(@RequestBody trainRoute: TrainRoute) = trainRouteService.delete(trainRoute)
+
+    @DeleteMapping("/{id}")
+    fun deleteById(@PathVariable id: Long) = trainRouteService.delete(trainRouteService.getById(id))
 }
