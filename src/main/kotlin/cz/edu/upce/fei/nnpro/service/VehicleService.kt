@@ -14,5 +14,5 @@ class VehicleService(
 
     fun getAll(): List<Vehicle> = vehicleRepository.findAll()
 
-    fun delete(vehicle: Vehicle) = vehicleRepository.delete(vehicle)
+    fun delete(id: Long) = vehicleRepository.deleteById(id)
 }

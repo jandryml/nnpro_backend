@@ -444,6 +444,7 @@ databaseChangeLog:
               - column:
                   name: vehicle_id
                   type: BIGINT
+
         - createTable:
             tableName: transport_company
             columns:
@@ -458,6 +459,7 @@ databaseChangeLog:
               - column:
                   name: name
                   type: VARCHAR(255)
+
         - createTable:
             tableName: vehicle
             columns:

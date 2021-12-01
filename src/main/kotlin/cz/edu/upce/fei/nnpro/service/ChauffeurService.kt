@@ -14,5 +14,5 @@ class ChauffeurService(
 
     fun getAll(): List<Chauffeur> = chauffeurRepository.findAll()
 
-    fun delete(chauffeur: Chauffeur) = chauffeurRepository.delete(chauffeur)
+    fun delete(id: Long) = chauffeurRepository.deleteById(id)
 }

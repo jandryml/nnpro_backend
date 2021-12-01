@@ -28,9 +28,6 @@ class ChauffeurController(
     @PostMapping
     fun save(@RequestBody chauffeur: Chauffeur) = chauffeurService.save(chauffeur)
 
-    @DeleteMapping
-    fun delete(@RequestBody chauffeur: Chauffeur) = chauffeurService.delete(chauffeur)
-
     @DeleteMapping("/{id}")
-    fun deleteById(@PathVariable id: Long) = chauffeurService.delete(chauffeurService.getById(id))
+    fun deleteById(@PathVariable id: Long) = chauffeurService.delete(id)
 }

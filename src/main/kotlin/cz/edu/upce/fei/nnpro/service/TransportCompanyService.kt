@@ -14,5 +14,5 @@ class TransportCompanyService(
 
     fun getAll(): List<TransportCompany> = transportCompanyRepository.findAll()
 
-    fun delete(transportCompany: TransportCompany) = transportCompanyRepository.delete(transportCompany)
+    fun delete(id: Long) = transportCompanyRepository.deleteById(id)
 }

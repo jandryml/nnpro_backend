@@ -28,9 +28,6 @@ class VehicleController(
     @PostMapping
     fun save(@RequestBody vehicle: Vehicle) = vehicleService.save(vehicle)
 
-    @DeleteMapping
-    fun delete(@RequestBody vehicle: Vehicle) = vehicleService.delete(vehicle)
-
     @DeleteMapping("/{id}")
-    fun deleteById(@PathVariable id: Long) = vehicleService.delete(vehicleService.getById(id))
+    fun deleteById(@PathVariable id: Long) = vehicleService.delete(id)
 }

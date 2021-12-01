@@ -28,9 +28,6 @@ class TransportCompanyController(
     @PostMapping
     fun save(@RequestBody transportCompany: TransportCompany) = transportCompanyService.save(transportCompany)
 
-    @DeleteMapping
-    fun delete(@RequestBody transportCompany: TransportCompany) = transportCompanyService.delete(transportCompany)
-
     @DeleteMapping("/{id}")
-    fun deleteById(@PathVariable id: Long) = transportCompanyService.delete(transportCompanyService.getById(id))
+    fun deleteById(@PathVariable id: Long) = transportCompanyService.delete(id)
 }
