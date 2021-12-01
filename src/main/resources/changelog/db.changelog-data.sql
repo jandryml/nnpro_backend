@@ -55,3 +55,48 @@ INSERT INTO rail (code, enabled, name, source_station_id, target_station_id) VAL
 INSERT INTO rail (code, enabled, name, source_station_id, target_station_id) VALUES ('T010', true, 'Praha - Český Brod', 5, 4);
 INSERT INTO rail (code, enabled, name, source_station_id, target_station_id) VALUES ('T011', true, 'Česká Třebová - Blansko', 3, 2);
 INSERT INTO rail (code, enabled, name, source_station_id, target_station_id) VALUES ('T012', true, 'Blansko - Brno', 2, 1);
+
+-- changeset drymlj:5
+-- comment: data 5 - second phase data
+insert into transport_company (name) values ('Flixbus');
+insert into transport_company (name) values ('ČSAD');
+
+insert into vehicle (name, capacity, parameters, company_id) values ('Bus Standard B1', 20, 'Barva: Cerna; Typ pohonu: Nafta;', 1);
+insert into vehicle (name, capacity, parameters, company_id) values ('Bus Standard B1', 20, 'Barva: Zelena; Typ pohonu: Nafta;', 1);
+insert into vehicle (name, capacity, parameters, company_id) values ('Bus Standard B1', 20, 'Barva: Bila; Typ pohonu: Nafta;', 2);
+insert into vehicle (name, capacity, parameters, company_id) values ('Jumbo-Bus J4', 50, 'Barva: Bila; Typ pohonu: Elektro;', 1);
+insert into vehicle (name, capacity, parameters, company_id) values ('Mini-Bus A1', 15, 'Barva: Bila; Typ pohonu: Benzin;', 2);
+insert into vehicle (name, capacity, parameters, company_id) values ('Bus Standard B3', 20, 'Barva: Modra; Typ pohonu: Benzin;', 1);
+
+insert into chauffeur (firstname, lastname, driving_license, driving_experience, phone_number, vehicle_id) values ('Franta', 'Novak', 'A1, B, D', '5 let', '+420 123 456 789', 1);
+insert into chauffeur (firstname, lastname, driving_license, driving_experience, phone_number, vehicle_id) values ('Petr', 'Svoboda', 'AM, D, DE', '13 let', '+420 987 654 321', 2);
+insert into chauffeur (firstname, lastname, driving_license, driving_experience, phone_number, vehicle_id) values ('Milan', 'Dvořák', 'BE, DE', '28 let', '+420 654 987 321', 3);
+insert into chauffeur (firstname, lastname, driving_license, driving_experience, phone_number, vehicle_id) values ('Lukáš', 'Černý', 'A, B, D', '4 let', '+420 789 456 123', 4);
+insert into chauffeur (firstname, lastname, driving_license, driving_experience, phone_number, vehicle_id) values ('Martin', 'Krejčí', 'D1, D1E', '17 let', '+420 321 654 987', 5);
+insert into chauffeur (firstname, lastname, driving_license, driving_experience, phone_number, vehicle_id) values ('Petr', 'Veselý', 'D1, C', '9 let', '+420 456 789 123', 6);
+
+-- changeset drymlj:6
+-- comment: data 6 - train route
+INSERT INTO train_route (train_code, closure, capacity) VALUES ('Praha - Pardubice', false, 98);
+INSERT INTO train_route (train_code, closure, capacity) VALUES ('Zruč - Pardubice', false, 65);
+INSERT INTO train_route (train_code, closure, capacity) VALUES ('Praha - Brno', false, 120);
+
+INSERT INTO public.train_route_section (route_order, station_id, train_route_id) VALUES (0, 5, 1);
+INSERT INTO public.train_route_section (route_order, station_id, train_route_id) VALUES (1, 4, 1);
+INSERT INTO public.train_route_section (route_order, station_id, train_route_id) VALUES (2, 10, 1);
+INSERT INTO public.train_route_section (route_order, station_id, train_route_id) VALUES (3, 9, 1);
+INSERT INTO public.train_route_section (route_order, station_id, train_route_id) VALUES (4, 8, 1);
+INSERT INTO public.train_route_section (route_order, station_id, train_route_id) VALUES (0, 13, 2);
+INSERT INTO public.train_route_section (route_order, station_id, train_route_id) VALUES (1, 12, 2);
+INSERT INTO public.train_route_section (route_order, station_id, train_route_id) VALUES (2, 11, 2);
+INSERT INTO public.train_route_section (route_order, station_id, train_route_id) VALUES (3, 10, 2);
+INSERT INTO public.train_route_section (route_order, station_id, train_route_id) VALUES (4, 9, 2);
+INSERT INTO public.train_route_section (route_order, station_id, train_route_id) VALUES (5, 8, 2);
+INSERT INTO public.train_route_section (route_order, station_id, train_route_id) VALUES (0, 5, 3);
+INSERT INTO public.train_route_section (route_order, station_id, train_route_id) VALUES (1, 4, 3);
+INSERT INTO public.train_route_section (route_order, station_id, train_route_id) VALUES (2, 10, 3);
+INSERT INTO public.train_route_section (route_order, station_id, train_route_id) VALUES (3, 9, 3);
+INSERT INTO public.train_route_section (route_order, station_id, train_route_id) VALUES (4, 8, 3);
+INSERT INTO public.train_route_section (route_order, station_id, train_route_id) VALUES (5, 3, 3);
+INSERT INTO public.train_route_section (route_order, station_id, train_route_id) VALUES (6, 2, 3);
+INSERT INTO public.train_route_section (route_order, station_id, train_route_id) VALUES (7, 1, 3);
