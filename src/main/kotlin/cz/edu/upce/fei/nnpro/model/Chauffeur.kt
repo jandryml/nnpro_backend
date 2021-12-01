@@ -1,6 +1,5 @@
 package cz.edu.upce.fei.nnpro.model
 
-import java.util.*
 import javax.persistence.*
 
 @Entity
@@ -12,5 +11,8 @@ class Chauffeur(
     var lastname: String = "",
     var drivingLicense: String = "",
     var drivingExperience: String = "",
-    var phoneNumber: String = ""
+    var phoneNumber: String = "",
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "vehicle_id")
+    var vehicle: Vehicle? = null
 )

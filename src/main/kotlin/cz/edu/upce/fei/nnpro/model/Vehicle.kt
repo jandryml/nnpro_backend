@@ -1,6 +1,5 @@
 package cz.edu.upce.fei.nnpro.model
 
-import java.util.*
 import javax.persistence.*
 
 @Entity
@@ -11,7 +10,7 @@ class Vehicle(
     var name: String = "",
     var capacity: Int = 0,
     var parameters: String = "",
-    @OneToMany(cascade = [CascadeType.ALL], orphanRemoval = true)
-    @JoinColumn(name = "vehicle_id")
-    var chauffeurs: List<Chauffeur> =  mutableListOf()
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "company_id")
+    var company: TransportCompany? = null
 )
