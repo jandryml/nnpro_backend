@@ -352,14 +352,15 @@ databaseChangeLog:
             constraintName: uq_users_username
             tableName: users
   #</editor-fold>
+  #<editor-fold desc="changeset 2 - user update">
   - changeSet:
       id: 2
       author: drymlj
       comment: ddl 2 - user column change
       changes:
-        -  dropColumn:
-             columnName:  group
-             tableName:  users
+        - dropColumn:
+            columnName: group
+            tableName: users
         - addColumn:
             tableName: users
             columns:
@@ -367,3 +368,45 @@ databaseChangeLog:
                   name: user_group
                   type: varchar(50)
                   defaultValue: NONE
+
+  #</editor-fold>
+  #<editor-fold desc="changeset 3 - ">
+  - changeSet:
+      id: 3
+      author: drymlj
+      comment: ddl 3 - user column change
+      changes:
+        - addUniqueConstraint:
+            columnNames: train_route_id, station_id
+            constraintName: uq_trs_station
+            tableName: train_route_section
+        - addUniqueConstraint:
+            columnNames: train_route_id, route_order
+            constraintName: uq_trs_order
+            tableName: train_route_section
+
+        - addUniqueConstraint:
+            columnNames: substitute_route_id, station_id
+            constraintName: uq_srs_station
+            tableName: substitute_route_section
+        - addUniqueConstraint:
+            columnNames: substitute_route_id, route_order
+            constraintName: uq_srs_order
+            tableName: substitute_route_section
+
+        - addColumn:
+            tableName: substitute_route
+            columns:
+              - column:
+                  name: validated
+                  type: boolean
+                  defaultValue: false
+
+        - addColumn:
+            tableName: train_route
+            columns:
+              - column:
+                  name: capacity
+                  type: BIGINT
+                  defaultValue: 0
+  #</editor-fold>
