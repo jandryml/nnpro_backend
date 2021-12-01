@@ -427,7 +427,7 @@ databaseChangeLog:
                     primaryKey: true
                     primaryKeyName: chauffeur_pkey
               - column:
-                  name: surname
+                  name: firstname
                   type: VARCHAR(255)
               - column:
                   name: lastname
@@ -442,7 +442,7 @@ databaseChangeLog:
                   name: phone_number
                   type: VARCHAR(255)
               - column:
-                  name: chauffeur_id
+                  name: vehicle_id
                   type: BIGINT
         - createTable:
             tableName: transport_company
@@ -475,36 +475,30 @@ databaseChangeLog:
               - column:
                   name: capacity
                   type: INTEGER
-                  constraints:
-                    nullable: false
               - column:
-                  name: driving_license
-                  type: VARCHAR(255)
+                  name: parameters
+                  type: VARCHAR(1024)
               - column:
-                  name: driving_experience
-                  type: VARCHAR(255)
-              - column:
-                  name: phone_number
-                  type: VARCHAR(255)
-              - column:
-                  name: transport_company_id
+                  name: company_id
                   type: BIGINT
+
         - addForeignKeyConstraint:
-            baseColumnNames: chauffeur_id
+            baseColumnNames: vehicle_id
             baseTableName: chauffeur
-            constraintName: fk_srs_chauffeur
+            constraintName: fk_cha_vehicle
             onDelete: NO ACTION
             onUpdate: NO ACTION
             referencedColumnNames: id
             referencedTableName: vehicle
             validate: true
+
         - addForeignKeyConstraint:
-            baseColumnNames: transport_company_id
+            baseColumnNames: company_id
             baseTableName: vehicle
-            constraintName: fk_srs_transport_company
+            constraintName: fk_veh_company
             onDelete: NO ACTION
             onUpdate: NO ACTION
             referencedColumnNames: id
             referencedTableName: transport_company
             validate: true
-            #</editor-fold>
+  #</editor-fold>

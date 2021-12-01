@@ -11,9 +11,6 @@ class Vehicle(
     var name: String = "",
     var capacity: Int = 0,
     @OneToMany(cascade = [CascadeType.ALL], orphanRemoval = true)
-    @JoinColumn(name = "chauffeur_id")
-    var chauffeurs: List<Chauffeur> =  mutableListOf(),
-    @OneToOne
-    @JoinColumn(name = "transport_company_id")
-    val transportCompany: TransportCompany? = null
+    @JoinColumn(name = "vehicle_id")
+    var chauffeurs: List<Chauffeur> =  mutableListOf()
 )

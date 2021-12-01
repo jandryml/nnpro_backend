@@ -18,7 +18,7 @@ class ChauffeurController(
         return try {
             ResponseEntity.ok(chauffeurService.getById(id))
         } catch (e: JpaObjectRetrievalFailureException) {
-            ResponseEntity.status(542).body(ResponseDto("Train route with id $id not found!"))
+            ResponseEntity.status(542).body(ResponseDto("Chauffeur with id $id not found!"))
         }
     }
 
