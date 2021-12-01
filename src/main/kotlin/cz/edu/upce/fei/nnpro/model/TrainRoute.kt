@@ -8,7 +8,7 @@ class TrainRoute(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = Long.MIN_VALUE,
     var trainCode: String = "",
-    var capacity: Long = 0,
+    var capacity: Int = 0,
     //TODO asi nebude potreba, stacil by check, jestli jsou nejake Incidenty
     var closure: Boolean = false,
     @OneToMany(cascade = [CascadeType.ALL], orphanRemoval = true)

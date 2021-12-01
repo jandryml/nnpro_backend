@@ -1,6 +1,6 @@
 package cz.edu.upce.fei.nnpro.mapper
 
-import cz.edu.upce.fei.nnpro.dto.RouteSectioDto
+import cz.edu.upce.fei.nnpro.dto.RouteSectionDto
 import cz.edu.upce.fei.nnpro.dto.TrainRouteDto
 import cz.edu.upce.fei.nnpro.model.TrainRoute
 import cz.edu.upce.fei.nnpro.service.TrainRouteSectionService
@@ -21,6 +21,6 @@ class TrainRouteMapper(
     }
 
     fun toDto(trainRoute: TrainRoute) = trainRoute.run {
-        TrainRouteDto(id, trainCode, closure, capacity, sections.map { RouteSectioDto(it.station!!.id, it.routeOrder) })
+        TrainRouteDto(id, trainCode, closure, capacity, sections.map { RouteSectionDto(it.station!!.id, it.routeOrder) })
     }
 }

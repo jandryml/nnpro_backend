@@ -1,6 +1,6 @@
 package cz.edu.upce.fei.nnpro.dto
 
-class RouteSectioDto(
+class RouteSectionDto(
     var stationId: Long,
     var order: Int = -1
 )

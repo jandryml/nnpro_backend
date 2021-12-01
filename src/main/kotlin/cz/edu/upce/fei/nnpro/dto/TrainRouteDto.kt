@@ -4,6 +4,6 @@ class TrainRouteDto(
     var id: Long = Long.MIN_VALUE,
     var trainCode: String = "",
     var closure: Boolean = false,
-    var capacity: Long = 0,
-    var sections: List<RouteSectioDto> = emptyList()
+    var capacity: Int = 0,
+    var sections: List<RouteSectionDto> = emptyList()
 )

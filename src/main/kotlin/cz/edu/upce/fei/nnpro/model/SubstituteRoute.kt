@@ -8,10 +8,11 @@ class SubstituteRoute(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = Long.MIN_VALUE,
     val name: String = "",
-    @OneToMany(cascade = [CascadeType.ALL], orphanRemoval = true)
-    @JoinColumn(name = "substitute_route_id")
-    var sections: List<SubstituteRouteSection> =  ArrayList(),
     @OneToOne
     @JoinColumn(name = "train_route_id")
-    val concernedTrainRoute: TrainRoute? = null
+    val concernedTrainRoute: TrainRoute? = null,
+    val validated: Boolean = false,
+    @OneToMany(cascade = [CascadeType.ALL], orphanRemoval = true)
+    @JoinColumn(name = "substitute_route_id")
+    var sections: List<SubstituteRouteSection> =  ArrayList()
 )

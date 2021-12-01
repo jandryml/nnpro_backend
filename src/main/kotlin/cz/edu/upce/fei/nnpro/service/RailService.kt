@@ -1,6 +1,6 @@
 package cz.edu.upce.fei.nnpro.service
 
-import cz.edu.upce.fei.nnpro.dto.RouteSectioDto
+import cz.edu.upce.fei.nnpro.dto.RouteSectionDto
 import cz.edu.upce.fei.nnpro.model.Rail
 import cz.edu.upce.fei.nnpro.repository.RailRepository
 import org.springframework.stereotype.Service
@@ -22,7 +22,7 @@ class RailService(
     fun getRailBetween(sourceStationId: Long, targetStationId: Long) =
         railRepository.getRailBetween(sourceStationId, targetStationId)
 
-    fun validateStationSequence(routeSections: List<RouteSectioDto>): Boolean {
+    fun validateStationSequence(routeSections: List<RouteSectionDto>): Boolean {
         routeSections.forEachIndexed { idx, it ->
             it.order = idx
             if (routeSections.lastIndex == idx) return@forEachIndexed

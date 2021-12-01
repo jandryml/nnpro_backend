@@ -13,10 +13,10 @@ class TrainRouteService(
     private val railService: RailService,
     private val trainRouteSectionService: TrainRouteSectionService
 ) {
-    fun save(trainRoute: TrainRouteDto): TrainRoute? {
-        return if (railService.validateStationSequence(trainRoute.sections)) {
-            trainRouteSectionService.deleteAllByRouteId(trainRoute.id)
-            trainRouteRepository.save(trainRoute.run {
+    fun save(trainRouteDto: TrainRouteDto): TrainRoute? {
+        return if (railService.validateStationSequence(trainRouteDto.sections)) {
+            trainRouteSectionService.deleteAllByRouteId(trainRouteDto.id)
+            trainRouteRepository.save(trainRouteDto.run {
                 TrainRoute(
                     id, trainCode, capacity, closure,
                     sections.map { TrainRouteSection(station = Station(it.stationId), routeOrder = it.order) })
