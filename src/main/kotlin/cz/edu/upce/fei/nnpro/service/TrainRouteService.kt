@@ -1,20 +1,27 @@
 package cz.edu.upce.fei.nnpro.service
 
+import cz.edu.upce.fei.nnpro.dto.TrainRouteDto
+import cz.edu.upce.fei.nnpro.model.Station
 import cz.edu.upce.fei.nnpro.model.TrainRoute
+import cz.edu.upce.fei.nnpro.model.TrainRouteSection
 import cz.edu.upce.fei.nnpro.repository.TrainRouteRepository
 import org.springframework.stereotype.Service
 
 @Service
 class TrainRouteService(
     private val trainRouteRepository: TrainRouteRepository,
-    private val railService: RailService
+    private val railService: RailService,
+    private val trainRouteSectionService: TrainRouteSectionService
 ) {
-    fun save(trainRoute: TrainRoute): TrainRoute {
-        trainRoute.sections.forEachIndexed { idx, it ->
-            if (trainRoute.sections.lastIndex == idx) return@forEachIndexed
-            railService.getRailBetween(it.station!!.id, trainRoute.sections[idx].id)
-        }
-        return trainRouteRepository.save(trainRoute)
+    fun save(trainRoute: TrainRouteDto): TrainRoute? {
+        return if (railService.validateStationSequence(trainRoute.sections)) {
+            trainRouteSectionService.deleteAllByRouteId(trainRoute.id)
+            trainRouteRepository.save(trainRoute.run {
+                TrainRoute(
+                    id, trainCode, capacity, closure,
+                    sections.map { TrainRouteSection(station = Station(it.stationId), routeOrder = it.order) })
+            })
+        } else null
     }
 
     fun getById(id: Long) = trainRouteRepository.getById(id)
