@@ -58,8 +58,8 @@ INSERT INTO rail (code, enabled, name, source_station_id, target_station_id) VAL
 
 -- changeset drymlj:5
 -- comment: data 5 - second phase data
-insert into transport_company (name) values ('Flixbus');
-insert into transport_company (name) values ('ČSAD');
+insert into transport_company (code, name, cin) values ('A51', 'Flixbus', '5484415');
+insert into transport_company (code, name, cin) values ('B59', 'ČSAD', '9964487');
 
 insert into vehicle (name, capacity, parameters, company_id) values ('Bus Standard B1', 20, 'Barva: Cerna; Typ pohonu: Nafta;', 1);
 insert into vehicle (name, capacity, parameters, company_id) values ('Bus Standard B1', 20, 'Barva: Zelena; Typ pohonu: Nafta;', 1);

@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service
 @Service
 class TransportCompanyMapper {
     fun toModel(transportCompanyDto: TransportCompanyDto)= transportCompanyDto.run {
-        TransportCompany(id, name)
+        TransportCompany(id, code, name, cin)
     }
 
     fun toDto(transportCompany: TransportCompany) = transportCompany.run {
-        TransportCompanyDto(id, name)
+        TransportCompanyDto(id, code, name, cin)
     }
 }

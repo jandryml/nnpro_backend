@@ -7,5 +7,7 @@ class TransportCompany(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = Long.MIN_VALUE,
-    var name: String = ""
+    var code: String = "",
+    var name: String = "",
+    var cin: String = ""
 )

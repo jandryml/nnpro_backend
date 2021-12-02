@@ -459,7 +459,6 @@ databaseChangeLog:
               - column:
                   name: name
                   type: VARCHAR(255)
-
         - createTable:
             tableName: vehicle
             columns:
@@ -508,3 +507,18 @@ databaseChangeLog:
             referencedTableName: transport_company
             validate: true
   #</editor-fold>
+  #<editor-fold desc="changeset 2 - transport_company update">
+  - changeSet:
+      id: 5
+      author: bohmj
+      comment: ddl 3 - transport_company column change
+      changes:
+        - addColumn:
+            tableName: transport_company
+            columns:
+              - column:
+                  name: code
+                  type: VARCHAR(255)
+              - column:
+                  name: cin
+                  type: VARCHAR(255)
