@@ -5,5 +5,6 @@ class VehicleDto(
     var name: String,
     var capacity: Int,
     var parameters: String,
-    var companyId: Long
+    var companyId: Long,
+    var image: String = ""
 )

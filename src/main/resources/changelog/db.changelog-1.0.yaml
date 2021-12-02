@@ -483,6 +483,10 @@ databaseChangeLog:
               - column:
                   name: company_id
                   type: BIGINT
+              - column:
+                  name: image
+                  type: BLOB
+                  defaultValue: null
 
         - addForeignKeyConstraint:
             baseColumnNames: vehicle_id

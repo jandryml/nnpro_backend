@@ -12,5 +12,7 @@ class Vehicle(
     var parameters: String = "",
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "company_id")
-    var company: TransportCompany? = null
+    var company: TransportCompany? = null,
+    @Lob
+    var image: ByteArray? = null
 )
