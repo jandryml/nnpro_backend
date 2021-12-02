@@ -368,7 +368,6 @@ databaseChangeLog:
                   name: user_group
                   type: varchar(50)
                   defaultValue: NONE
-
   #</editor-fold>
   #<editor-fold desc="changeset 3 - ">
   - changeSet:
@@ -410,3 +409,116 @@ databaseChangeLog:
                   type: BIGINT
                   defaultValue: 0
   #</editor-fold>
+  #<editor-fold desc="changeset 4 - ">
+  - changeSet:
+      id: 4
+      author: bohmj
+      comment: ddl 4 - add tables, constraints
+      changes:
+        - createTable:
+            tableName: chauffeur
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: chauffeur_pkey
+              - column:
+                  name: firstname
+                  type: VARCHAR(255)
+              - column:
+                  name: lastname
+                  type: VARCHAR(255)
+              - column:
+                  name: driving_license
+                  type: VARCHAR(255)
+              - column:
+                  name: driving_experience
+                  type: VARCHAR(255)
+              - column:
+                  name: phone_number
+                  type: VARCHAR(255)
+              - column:
+                  name: vehicle_id
+                  type: BIGINT
+
+        - createTable:
+            tableName: transport_company
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: transport_company_pkey
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+        - createTable:
+            tableName: vehicle
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: vehicle_pkey
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: capacity
+                  type: INTEGER
+              - column:
+                  name: parameters
+                  type: VARCHAR(1024)
+              - column:
+                  name: company_id
+                  type: BIGINT
+              - column:
+                  name: image
+                  type: BLOB
+                  defaultValue: null
+
+        - addForeignKeyConstraint:
+            baseColumnNames: vehicle_id
+            baseTableName: chauffeur
+            constraintName: fk_cha_vehicle
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: vehicle
+            validate: true
+
+        - addForeignKeyConstraint:
+            baseColumnNames: company_id
+            baseTableName: vehicle
+            constraintName: fk_veh_company
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: transport_company
+            validate: true
+  #</editor-fold>
+  #<editor-fold desc="changeset 2 - transport_company update">
+  - changeSet:
+      id: 5
+      author: bohmj
+      comment: ddl 3 - transport_company column change
+      changes:
+        - addColumn:
+            tableName: transport_company
+            columns:
+              - column:
+                  name: code
+                  type: VARCHAR(255)
+              - column:
+                  name: cin
+                  type: VARCHAR(255)
