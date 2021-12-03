@@ -29,6 +29,8 @@ dependencies {
     implementation("org.liquibase:liquibase-core:4.5.0")
     implementation("org.postgresql:postgresql")
 
+    implementation("org.apache.poi:poi-ooxml:4.1.0")
+
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
