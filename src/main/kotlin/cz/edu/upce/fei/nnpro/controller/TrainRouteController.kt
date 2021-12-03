@@ -7,7 +7,6 @@ import cz.edu.upce.fei.nnpro.model.TrainRoute
 import cz.edu.upce.fei.nnpro.service.TrainRouteService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
-import org.springframework.orm.jpa.JpaObjectRetrievalFailureException
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -17,13 +16,11 @@ class TrainRouteController(
     @Autowired val trainRouteMapper: TrainRouteMapper
 ) {
     @GetMapping("/{id}")
-    fun detail(@PathVariable id: Long): ResponseEntity<Any> {
-        return try {
-            ResponseEntity.ok(trainRouteMapper.toDto(trainRouteService.getById(id)))
-        } catch (e: JpaObjectRetrievalFailureException) {
-            ResponseEntity.status(542).body(ResponseDto("Train route with id $id not found!"))
-        }
-    }
+    fun detail(@PathVariable id: Long) =
+        trainRouteService.getById(id)
+            ?.let { ResponseEntity.ok(trainRouteMapper.toDto(it)) }
+            ?: ResponseEntity.status(542).body(ResponseDto("Train route with id $id not found!"))
+
 
     @GetMapping
     fun listAll(): List<TrainRoute> = trainRouteService.getAll()
@@ -38,5 +35,5 @@ class TrainRouteController(
     fun delete(@RequestBody trainRoute: TrainRoute) = trainRouteService.delete(trainRoute)
 
     @DeleteMapping("/{id}")
-    fun deleteById(@PathVariable id: Long) = trainRouteService.delete(trainRouteService.getById(id))
+    fun deleteById(@PathVariable id: Long) = trainRouteService.getById(id)?.let { trainRouteService.delete(it) }
 }

@@ -507,11 +507,11 @@ databaseChangeLog:
             referencedTableName: transport_company
             validate: true
   #</editor-fold>
-  #<editor-fold desc="changeset 2 - transport_company update">
+  #<editor-fold desc="changeset 5 - transport_company update">
   - changeSet:
       id: 5
       author: bohmj
-      comment: ddl 3 - transport_company column change
+      comment: ddl 5 - transport_company column change
       changes:
         - addColumn:
             tableName: transport_company
@@ -522,3 +522,18 @@ databaseChangeLog:
               - column:
                   name: cin
                   type: VARCHAR(255)
+  #</editor-fold>
+  #<editor-fold desc="changeset 6 - add availability column to vehicle table">
+  - changeSet:
+      id: 6
+      author: drymlj
+      comment: ddl 6 - add substitute_route_id column to vehicle table
+      changes:
+        - addColumn:
+            tableName: vehicle
+            columns:
+              - column:
+                  name: substitute_route_id
+                  type: BIGINT
+                  defaultValue: null
+  #</editor-fold>

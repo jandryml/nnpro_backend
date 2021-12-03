@@ -5,6 +5,7 @@ import cz.edu.upce.fei.nnpro.model.Station
 import cz.edu.upce.fei.nnpro.model.TrainRoute
 import cz.edu.upce.fei.nnpro.model.TrainRouteSection
 import cz.edu.upce.fei.nnpro.repository.TrainRouteRepository
+import org.springframework.orm.jpa.JpaObjectRetrievalFailureException
 import org.springframework.stereotype.Service
 
 @Service
@@ -24,7 +25,13 @@ class TrainRouteService(
         } else null
     }
 
-    fun getById(id: Long) = trainRouteRepository.getById(id)
+    fun getById(id: Long): TrainRoute? {
+        return try {
+            trainRouteRepository.getById(id)
+        } catch (e: JpaObjectRetrievalFailureException) {
+            null
+        }
+    }
 
     fun getAll(): List<TrainRoute> = trainRouteRepository.findAll()
 

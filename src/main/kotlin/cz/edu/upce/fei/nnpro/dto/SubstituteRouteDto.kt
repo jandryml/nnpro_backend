@@ -6,5 +6,6 @@ class SubstituteRouteDto(
     var trainRouteId: Long,
     var validated: Boolean = false,
     var minimalCapacity: Int,
-    var sections: List<RouteSectionDto> = emptyList()
+    var sections: List<RouteSectionDto> = emptyList(),
+    var vehicleIds: List<Long> = emptyList()
 )

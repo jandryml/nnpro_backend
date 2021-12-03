@@ -25,6 +25,10 @@ class VehicleController(
         }
     }
 
+    @GetMapping("/available-vehicles")
+    fun listAvailableByCompanyIds(@RequestBody companyIds: List<Long>) =
+        vehicleService.getAvailableVehicleForCompanies(companyIds).map(vehicleMapper::toDto)
+
     @GetMapping
     fun listAll() = vehicleService.getAll().map(vehicleMapper::toDto)
 

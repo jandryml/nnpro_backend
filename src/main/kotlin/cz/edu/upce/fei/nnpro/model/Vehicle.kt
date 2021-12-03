@@ -14,5 +14,8 @@ class Vehicle(
     @JoinColumn(name = "company_id")
     var company: TransportCompany? = null,
     @Lob
-    var image: ByteArray? = null
+    var image: ByteArray? = null,
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "substitute_route_id")
+    var substituteRoute: SubstituteRoute? = null
 )

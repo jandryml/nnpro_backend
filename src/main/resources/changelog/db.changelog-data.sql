@@ -61,12 +61,12 @@ INSERT INTO rail (code, enabled, name, source_station_id, target_station_id) VAL
 insert into transport_company (code, name, cin) values ('A51', 'Flixbus', '5484415');
 insert into transport_company (code, name, cin) values ('B59', 'ČSAD', '9964487');
 
-insert into vehicle (name, capacity, parameters, company_id) values ('Bus Standard B1', 20, 'Barva: Cerna; Typ pohonu: Nafta;', 1);
-insert into vehicle (name, capacity, parameters, company_id) values ('Bus Standard B1', 20, 'Barva: Zelena; Typ pohonu: Nafta;', 1);
-insert into vehicle (name, capacity, parameters, company_id) values ('Bus Standard B1', 20, 'Barva: Bila; Typ pohonu: Nafta;', 2);
-insert into vehicle (name, capacity, parameters, company_id) values ('Jumbo-Bus J4', 50, 'Barva: Bila; Typ pohonu: Elektro;', 1);
-insert into vehicle (name, capacity, parameters, company_id) values ('Mini-Bus A1', 15, 'Barva: Bila; Typ pohonu: Benzin;', 2);
-insert into vehicle (name, capacity, parameters, company_id) values ('Bus Standard B3', 20, 'Barva: Modra; Typ pohonu: Benzin;', 1);
+insert into vehicle (name, capacity, parameters, company_id) values ('Bus Standard B1', 45, 'Barva: Cerna; Typ pohonu: Nafta;', 1);
+insert into vehicle (name, capacity, parameters, company_id) values ('Bus Standard B1', 45, 'Barva: Zelena; Typ pohonu: Nafta;', 1);
+insert into vehicle (name, capacity, parameters, company_id) values ('Bus Standard B1', 45, 'Barva: Bila; Typ pohonu: Nafta;', 2);
+insert into vehicle (name, capacity, parameters, company_id) values ('Jumbo-Bus J4', 75, 'Barva: Bila; Typ pohonu: Elektro;', 1);
+insert into vehicle (name, capacity, parameters, company_id) values ('Mini-Bus A1', 25, 'Barva: Bila; Typ pohonu: Benzin;', 2);
+insert into vehicle (name, capacity, parameters, company_id) values ('Bus Standard B3', 35, 'Barva: Modra; Typ pohonu: Benzin;', 1);
 
 insert into chauffeur (firstname, lastname, driving_license, driving_experience, phone_number, vehicle_id) values ('Franta', 'Novak', 'A1, B, D', '5 let', '+420 123 456 789', 1);
 insert into chauffeur (firstname, lastname, driving_license, driving_experience, phone_number, vehicle_id) values ('Petr', 'Svoboda', 'AM, D, DE', '13 let', '+420 987 654 321', 2);
@@ -77,7 +77,7 @@ insert into chauffeur (firstname, lastname, driving_license, driving_experience,
 
 -- changeset drymlj:6
 -- comment: data 6 - train route
-INSERT INTO train_route (train_code, closure, capacity) VALUES ('Praha - Pardubice', false, 98);
+INSERT INTO train_route (train_code, closure, capacity) VALUES ('Praha - Pardubice', false, 79);
 INSERT INTO train_route (train_code, closure, capacity) VALUES ('Zruč - Pardubice', false, 65);
 INSERT INTO train_route (train_code, closure, capacity) VALUES ('Praha - Brno', false, 120);
 
