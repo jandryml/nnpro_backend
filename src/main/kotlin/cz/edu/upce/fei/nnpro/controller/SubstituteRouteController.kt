@@ -30,10 +30,7 @@ class SubstituteRouteController(
 
     @PostMapping
     fun save(@RequestBody substituteRouteDto: SubstituteRouteDto): ResponseEntity<Any> {
-        return if (!substituteRouteService.validateStationSequence(substituteRouteDto)) {
-            ResponseEntity.status(526)
-                .body(ResponseDto("Station sequence is not valid! Check that rails between stations exists!"))
-        } else if (!substituteRouteService.validateVehiclesCapacity(substituteRouteDto)) {
+        return if (!substituteRouteService.validateVehiclesCapacity(substituteRouteDto)) {
             ResponseEntity.status(526)
                 .body(ResponseDto("Vehicles capacity is less than needed!"))
         } else if (!substituteRouteService.validateVehicleAvailability(substituteRouteDto)) {

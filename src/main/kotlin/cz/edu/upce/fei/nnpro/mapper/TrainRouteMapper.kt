@@ -21,6 +21,9 @@ class TrainRouteMapper(
     }
 
     fun toDto(trainRoute: TrainRoute) = trainRoute.run {
-        TrainRouteDto(id, trainCode, closure, capacity, sections.map { RouteSectionDto(it.station!!.id, it.routeOrder) })
+        TrainRouteDto(
+            id, trainCode, closure, capacity,
+            sections.map { RouteSectionDto(it.station!!.id, it.routeOrder, it.station!!.x, it.station!!.y) }
+        )
     }
 }

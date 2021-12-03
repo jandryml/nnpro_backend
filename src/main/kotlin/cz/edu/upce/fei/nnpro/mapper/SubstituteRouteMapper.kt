@@ -3,6 +3,7 @@ package cz.edu.upce.fei.nnpro.mapper
 import cz.edu.upce.fei.nnpro.dto.RouteSectionDto
 import cz.edu.upce.fei.nnpro.dto.SubstituteRouteDto
 import cz.edu.upce.fei.nnpro.model.SubstituteRoute
+import cz.edu.upce.fei.nnpro.service.RailService
 import cz.edu.upce.fei.nnpro.service.SubstituteRouteSectionService
 import cz.edu.upce.fei.nnpro.service.TrainRouteService
 import cz.edu.upce.fei.nnpro.service.VehicleService
@@ -25,7 +26,7 @@ class SubstituteRouteMapper(
 
     fun toDto(substituteRoute: SubstituteRoute) = substituteRoute.run {
         SubstituteRouteDto(id, name, concernedTrainRoute!!.id, validated, concernedTrainRoute.capacity,
-            sections.map { RouteSectionDto(it.station!!.id, it.routeOrder) },
+            sections.map { RouteSectionDto(it.station!!.id, it.routeOrder, it.station!!.x,it.station!!.y) },
             vehicleService.getBySubRouteId(id).map { it.id }
         )
     }
