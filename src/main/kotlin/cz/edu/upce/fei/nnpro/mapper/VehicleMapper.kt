@@ -13,13 +13,13 @@ class VehicleMapper(
 ) {
     fun toModel(vehicleDto: VehicleDto) = vehicleDto.run {
         val decodedImage = if (image.isNotEmpty()) {
-            Base64.getDecoder().decode(image)
+            Base64.getDecoder().decode(image.split(",")[1])
         } else null
         Vehicle(id, name, capacity, parameters, companyService.getById(companyId), decodedImage)
     }
 
     fun toDto(vehicle: Vehicle) = vehicle.run {
-        val encodedImage = image?.let { Base64.getEncoder().encodeToString(it); } ?: ""
+        val encodedImage = image?.let { "data:image/jpeg;base64,".plus(Base64.getEncoder().encodeToString(it)); } ?: ""
         VehicleDto(id, name, capacity, parameters, company!!.id, encodedImage)
     }
 }
