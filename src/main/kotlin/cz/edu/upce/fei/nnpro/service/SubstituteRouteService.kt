@@ -1,5 +1,6 @@
 package cz.edu.upce.fei.nnpro.service
 
+import cz.edu.upce.fei.nnpro.dto.RouteSectionDto
 import cz.edu.upce.fei.nnpro.dto.SubstituteRouteDto
 import cz.edu.upce.fei.nnpro.model.Station
 import cz.edu.upce.fei.nnpro.model.SubstituteRoute
@@ -40,9 +41,17 @@ class SubstituteRouteService(
         }
     }
 
+    fun createSubstituteRoute(trainRoute: TrainRoute) {
+        save(SubstituteRouteDto(
+            name = "Sub route for ${trainRoute.trainCode}",
+            minimalCapacity = trainRoute.capacity, trainRouteId = trainRoute.id,
+            sections = trainRoute.sections.map { RouteSectionDto(it.station!!.id, it.routeOrder) }
+        ))
+    }
+
     fun getById(id: Long) = substituteRouteRepository.getById(id)
 
-    fun getByTrainRouteId(id:Long) = substituteRouteRepository.getByConcernedTrainRoute_Id(id)
+    fun getByTrainRouteId(id: Long) = substituteRouteRepository.getByConcernedTrainRoute_Id(id)
 
     fun getAll(): List<SubstituteRoute> = substituteRouteRepository.findAll()
 

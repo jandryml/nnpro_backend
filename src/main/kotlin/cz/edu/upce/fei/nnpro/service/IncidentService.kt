@@ -27,12 +27,8 @@ class IncidentService(
     private fun triggerCreationOfSubRoutes(it: Rail) {
         trainRouteService.getAllTrainRoutesWithRail(it).forEach {
             if (substituteRouteService.getByTrainRouteId(it.id) == null) {
-                substituteRouteService.save(
-                    SubstituteRouteDto(
-                        name = "Sub route for ${it.trainCode}", minimalCapacity = it.capacity, trainRouteId = it.id,
-                        sections = it.sections.map { RouteSectionDto(it.station!!.id, it.routeOrder) }
-                    )
-                )
+                substituteRouteService.createSubstituteRoute(it)
+
             }
         }
     }

@@ -44,7 +44,6 @@ class SubstituteRouteController(
         }
     }
 
-
     @DeleteMapping
     fun delete(@RequestBody substituteRoute: SubstituteRoute) = substituteRouteService.delete(substituteRoute)
 

@@ -4,6 +4,7 @@ import cz.edu.upce.fei.nnpro.dto.ResponseDto
 import cz.edu.upce.fei.nnpro.dto.TrainRouteDto
 import cz.edu.upce.fei.nnpro.mapper.TrainRouteMapper
 import cz.edu.upce.fei.nnpro.model.TrainRoute
+import cz.edu.upce.fei.nnpro.service.SubstituteRouteService
 import cz.edu.upce.fei.nnpro.service.TrainRouteService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/api/train-route")
 class TrainRouteController(
     @Autowired val trainRouteService: TrainRouteService,
+    @Autowired val substituteRouteService: SubstituteRouteService,
     @Autowired val trainRouteMapper: TrainRouteMapper
 ) {
     @GetMapping("/{id}")
@@ -30,6 +32,11 @@ class TrainRouteController(
         trainRouteService.save(trainRoute) ?: ResponseEntity.status(526)
             .body(ResponseDto("Station sequence is not valid! Check that rails between stations exists!"))
 
+    @PostMapping("/generate-sub-route/{id}")
+    fun generateSubRouteManually(@PathVariable id: Long) =
+        trainRouteService.getById(id)
+            ?.let{ substituteRouteService.createSubstituteRoute(it)}
+            ?: ResponseEntity.status(563).body(ResponseDto("Train route wit $id doesn't exists!"))
 
     @DeleteMapping
     fun delete(@RequestBody trainRoute: TrainRoute) = trainRouteService.delete(trainRoute)
