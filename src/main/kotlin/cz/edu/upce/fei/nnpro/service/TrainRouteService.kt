@@ -1,6 +1,7 @@
 package cz.edu.upce.fei.nnpro.service
 
 import cz.edu.upce.fei.nnpro.dto.TrainRouteDto
+import cz.edu.upce.fei.nnpro.model.Rail
 import cz.edu.upce.fei.nnpro.model.Station
 import cz.edu.upce.fei.nnpro.model.TrainRoute
 import cz.edu.upce.fei.nnpro.model.TrainRouteSection
@@ -34,6 +35,10 @@ class TrainRouteService(
     }
 
     fun getAll(): List<TrainRoute> = trainRouteRepository.findAll()
+
+    fun getAllTrainRoutesWithRail(rail: Rail): List<TrainRoute> {
+        return getAll().filter { railService.isRailInTheStationSequence(rail, it.sections) }
+    }
 
     fun delete(trainRoute: TrainRoute) = trainRouteRepository.delete(trainRoute)
 }

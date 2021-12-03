@@ -42,6 +42,8 @@ class SubstituteRouteService(
 
     fun getById(id: Long) = substituteRouteRepository.getById(id)
 
+    fun getByTrainRouteId(id:Long) = substituteRouteRepository.getByConcernedTrainRoute_Id(id)
+
     fun getAll(): List<SubstituteRoute> = substituteRouteRepository.findAll()
 
     fun delete(substituteRoute: SubstituteRoute) {
