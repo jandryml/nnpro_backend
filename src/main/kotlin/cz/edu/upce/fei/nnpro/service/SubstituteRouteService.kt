@@ -2,10 +2,7 @@ package cz.edu.upce.fei.nnpro.service
 
 import cz.edu.upce.fei.nnpro.dto.RouteSectionDto
 import cz.edu.upce.fei.nnpro.dto.SubstituteRouteDto
-import cz.edu.upce.fei.nnpro.model.Station
-import cz.edu.upce.fei.nnpro.model.SubstituteRoute
-import cz.edu.upce.fei.nnpro.model.SubstituteRouteSection
-import cz.edu.upce.fei.nnpro.model.TrainRoute
+import cz.edu.upce.fei.nnpro.model.*
 import cz.edu.upce.fei.nnpro.repository.SubstituteRouteRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -51,7 +48,11 @@ class SubstituteRouteService(
 
     fun getById(id: Long) = substituteRouteRepository.getById(id)
 
-    fun getByTrainRouteId(id: Long) = substituteRouteRepository.getByConcernedTrainRoute_Id(id)
+    fun getByTrainRouteId(ids:List<Long>) = substituteRouteRepository.findByTrainRouteIds(ids)
+
+    fun getByIncident(incident: Incident) {
+        incident.affectedRail
+    }
 
     fun getAll(): List<SubstituteRoute> = substituteRouteRepository.findAll()
 
