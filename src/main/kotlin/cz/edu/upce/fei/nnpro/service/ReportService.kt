@@ -1,13 +1,13 @@
 package cz.edu.upce.fei.nnpro.service
 
+import cz.edu.upce.fei.nnpro.model.Report
 import org.apache.poi.ss.usermodel.Cell
 import org.apache.poi.ss.usermodel.Row
 import org.apache.poi.xssf.usermodel.XSSFSheet
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import java.io.File
-import java.io.FileOutputStream
+import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -19,16 +19,14 @@ class ReportService(
     @Autowired val substituteRouteService: SubstituteRouteService,
     @Autowired val trainRouteService: TrainRouteService
 ) {
-    fun generateChauffeur() {
-        val fileName = "soferi_${SimpleDateFormat("dd-M-yyyy_hh-mm-ss").format(Date())}.xlsx"
+    fun generateChauffeur(): Report {
         val data: MutableMap<String, Array<Any>> = generateChauffeurData()
-        generateReport(fileName, data)
+        return Report("application/xlsx", generateReport(data))
     }
 
-    fun generateIncidentsWithNadCoverage() {
-        val fileName = "incidentsWithNAD_${SimpleDateFormat("dd-M-yyyy_hh-mm-ss").format(Date())}.xlsx"
+    fun generateIncidentsWithNadCoverage(): Report {
         val data: MutableMap<String, Array<Any>> = generateIncidentsWithNadData()
-        generateReport(fileName, data)
+        return Report("application/xlsx", generateReport(data))
     }
 
     private fun generateIncidentsWithNadData(): MutableMap<String, Array<Any>> {
@@ -71,20 +69,20 @@ class ReportService(
         return data
     }
 
-    private fun generateReport(fileName: String, data: MutableMap<String, Array<Any>>) {
+    private fun generateReport(data: MutableMap<String, Array<Any>>): ByteArray {
         val workbook = XSSFWorkbook()
         val sheet = workbook.createSheet("Employee Data")
 
         fillSheetWithData(data, sheet)
 
-        //TODO not save to disk, instead send to client
+        val bos = ByteArrayOutputStream()
+
         try {
-            val out = FileOutputStream(File(fileName))
-            workbook.write(out)
-            out.close()
-        } catch (e: Exception) {
-            e.printStackTrace()
+            workbook.write(bos)
+        } finally {
+            bos.close()
         }
+        return bos.toByteArray()
     }
 
     private fun fillSheetWithData(data: MutableMap<String, Array<Any>>, sheet: XSSFSheet) {
@@ -99,6 +97,8 @@ class ReportService(
                     cell.setCellValue(obj)
                 else if (obj is Number)
                     cell.setCellValue(obj.toDouble())
+                else if (obj is Boolean)
+                    cell.setCellValue(if(obj) "True" else "False")
             }
         }
     }
