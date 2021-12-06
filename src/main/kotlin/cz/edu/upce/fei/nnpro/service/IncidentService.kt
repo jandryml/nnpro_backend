@@ -1,7 +1,5 @@
 package cz.edu.upce.fei.nnpro.service
 
-import cz.edu.upce.fei.nnpro.dto.RouteSectionDto
-import cz.edu.upce.fei.nnpro.dto.SubstituteRouteDto
 import cz.edu.upce.fei.nnpro.model.Incident
 import cz.edu.upce.fei.nnpro.model.Rail
 import cz.edu.upce.fei.nnpro.repository.IncidentRepository
@@ -26,9 +24,8 @@ class IncidentService(
 
     private fun triggerCreationOfSubRoutes(it: Rail) {
         trainRouteService.getAllTrainRoutesWithRail(it).forEach {
-            if (substituteRouteService.getByTrainRouteId(it.id) == null) {
+            if (substituteRouteService.getByTrainRouteId(listOf(it.id)).isEmpty()) {
                 substituteRouteService.createSubstituteRoute(it)
-
             }
         }
     }
