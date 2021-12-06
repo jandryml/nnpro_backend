@@ -537,3 +537,26 @@ databaseChangeLog:
                   type: BIGINT
                   defaultValue: null
   #</editor-fold>
+  #<editor-fold desc="changeset 6 - add availability column to vehicle table">
+  - changeSet:
+      id: 7
+      author: bohmj
+      comment: ddl 7 - remove parameters, add new three
+      changes:
+        - dropColumn:
+            columnName: parameters
+            tableName: vehicle
+        - addColumn:
+            tableName: vehicle
+            columns:
+              - column:
+                  name: color
+                  type: VARCHAR(255)
+              - column:
+                  name: year
+                  type: BIGINT
+                  defaultValue: null
+              - column:
+                  name: actuation
+                  type: VARCHAR(255)
+  #</editor-fold>

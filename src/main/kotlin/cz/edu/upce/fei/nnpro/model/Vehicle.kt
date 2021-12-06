@@ -9,7 +9,9 @@ class Vehicle(
     var id: Long = Long.MIN_VALUE,
     var name: String = "",
     var capacity: Int = 0,
-    var parameters: String = "",
+    var color: String = "",
+    var year: Long = 1900,
+    var actuation: String = "",
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "company_id")
     var company: TransportCompany? = null,

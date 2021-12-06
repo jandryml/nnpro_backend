@@ -4,7 +4,9 @@ class VehicleDto(
     var id: Long = Long.MIN_VALUE,
     var name: String,
     var capacity: Int,
-    var parameters: String,
+    var color: String,
+    var year: Long,
+    var actuation: String,
     var companyId: Long,
     var image: String = "",
     var substituteRouteId: Long? = null

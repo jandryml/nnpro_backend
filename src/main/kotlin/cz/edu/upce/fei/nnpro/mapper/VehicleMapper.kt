@@ -18,12 +18,12 @@ class VehicleMapper(
             Base64.getDecoder().decode(image.split(",")[1])
         } else null
         Vehicle(
-            id, name, capacity, parameters, companyService.getById(companyId), decodedImage,
+            id, name, capacity, color, year, actuation, companyService.getById(companyId), decodedImage,
             substituteRouteId?.let { substituteRouteService.getById(it) })
     }
 
     fun toDto(vehicle: Vehicle) = vehicle.run {
         val encodedImage = image?.let { "data:image/jpeg;base64,".plus(Base64.getEncoder().encodeToString(it)); } ?: ""
-        VehicleDto(id, name, capacity, parameters, company!!.id, encodedImage, substituteRoute?.id)
+        VehicleDto(id, name, capacity, color, year, actuation, company!!.id, encodedImage, substituteRoute?.id)
     }
 }
