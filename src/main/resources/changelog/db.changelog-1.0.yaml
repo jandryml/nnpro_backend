@@ -560,3 +560,16 @@ databaseChangeLog:
                   name: actuation
                   type: VARCHAR(255)
   #</editor-fold>
+  #<editor-fold desc="changeset 6 - add availability column to vehicle table">
+  - changeSet:
+      id: 8
+      author: bohmj
+      comment: ddl 8 - add active flag to users
+      changes:
+        - addColumn:
+            tableName: users
+            columns:
+              - column:
+                  name: active
+                  type: BOOLEAN
+  #</editor-fold>

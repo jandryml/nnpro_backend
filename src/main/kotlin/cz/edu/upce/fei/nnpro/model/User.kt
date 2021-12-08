@@ -21,7 +21,8 @@ class User(
     @Enumerated(EnumType.STRING)
     var role: Role = Role.ROLE_USER,
     @Enumerated(EnumType.STRING)
-    var userGroup: UserGroup = UserGroup.NONE
+    var userGroup: UserGroup = UserGroup.NONE,
+    var active: Boolean = false
 ) {
-    fun toDto() = UserDto(id, username, email, "", role.name, userGroup.name)
+    fun toDto() = UserDto(id, username, email, "", role.name, userGroup.name, active)
 }

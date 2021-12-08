@@ -2,8 +2,8 @@
 
 -- changeset drymlj:1
 -- comment: data 1 - insert Admin user
-INSERT INTO users (username, email, role, password)
-VALUES ('admin', 'admin@test.cz', 'ROLE_ADMIN', '$2a$10$qw1xEK9CrHizlecUs8r/zedWzOL4Q3f5Tpm3SwmbCX0W9Ha9LAZHm');
+INSERT INTO users (username, email, role, password, active)
+VALUES ('admin', 'admin@test.cz', 'ROLE_ADMIN', '$2a$10$qw1xEK9CrHizlecUs8r/zedWzOL4Q3f5Tpm3SwmbCX0W9Ha9LAZHm', true);
 -- encrypted 'password'
 
 -- changeset drymlj:2

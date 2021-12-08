@@ -8,7 +8,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.io.ByteArrayOutputStream
-import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -60,10 +59,20 @@ class ReportService(
     private fun generateChauffeurData(): MutableMap<String, Array<Any>> {
         val data: MutableMap<String, Array<Any>> = TreeMap()
         val vehicles = vehicleService.getAll()
-        data["1"] = arrayOf("ID", "NAME", "CAPACITY", "PARAMETERS", "COMPANY_NAME", "COMPANY_CODE", "COMPANY_CIN")
+        data["1"] = arrayOf(
+            "ID",
+            "NAME",
+            "CAPACITY",
+            "COLOR",
+            "YEAR",
+            "ACTUATION",
+            "COMPANY_NAME",
+            "COMPANY_CODE",
+            "COMPANY_CIN"
+        )
         vehicles.forEachIndexed { index, vehicle ->
             data[(index + 2).toString()] = vehicle.run {
-                arrayOf(id, name, capacity, parameters, company!!.name, company!!.code, company!!.cin)
+                arrayOf(id, name, capacity, color, year, actuation, company!!.name, company!!.code, company!!.cin)
             }
         }
         return data
@@ -98,7 +107,7 @@ class ReportService(
                 else if (obj is Number)
                     cell.setCellValue(obj.toDouble())
                 else if (obj is Boolean)
-                    cell.setCellValue(if(obj) "True" else "False")
+                    cell.setCellValue(if (obj) "True" else "False")
             }
         }
     }
