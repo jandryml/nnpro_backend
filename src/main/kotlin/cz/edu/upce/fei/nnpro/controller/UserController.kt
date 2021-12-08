@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpHeaders
 import org.springframework.http.ResponseEntity
 import org.springframework.orm.jpa.JpaObjectRetrievalFailureException
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -30,6 +31,7 @@ class UserController(
     }
 
     @GetMapping("/details")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_MODERATOR') or hasRole('ROLE_USER')")
     fun detail(): ResponseEntity<Any> {
         return try {
             ResponseEntity.ok(userService.getLoggedUser())
@@ -39,6 +41,7 @@ class UserController(
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_MODERATOR') or hasRole('ROLE_USER')")
     fun detail(@PathVariable id: Long): ResponseEntity<Any> {
         return try {
             ResponseEntity.ok(userService.getById(id))
@@ -49,6 +52,7 @@ class UserController(
 
     //TODO add validation to check rights to edit user
     @PostMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     fun edit(@RequestBody userDto: UserDto): ResponseEntity<Any> {
         return ResponseEntity.ok(userService.save(userDto))
     }

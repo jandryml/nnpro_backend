@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.dao.EmptyResultDataAccessException
 import org.springframework.http.ResponseEntity
 import org.springframework.orm.jpa.JpaObjectRetrievalFailureException
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -18,6 +19,7 @@ class ChauffeurController(
 
 ) {
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     fun detail(@PathVariable id: Long): ResponseEntity<Any> {
         return try {
             ResponseEntity.ok(chauffeurService.getById(id).let(chauffeurMapper::toDto))
@@ -27,14 +29,17 @@ class ChauffeurController(
     }
 
     @GetMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     fun listAll() = chauffeurService.getAll().map(chauffeurMapper::toDto)
 
     @PostMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     fun save(@RequestBody chauffeurDto: ChauffeurDto) =
         chauffeurService.save(chauffeurDto.let(chauffeurMapper::toModel))
             .let(chauffeurMapper::toDto)
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     fun deleteById(@PathVariable id: Long): ResponseEntity<ResponseDto> {
         return try {
             chauffeurService.delete(id)

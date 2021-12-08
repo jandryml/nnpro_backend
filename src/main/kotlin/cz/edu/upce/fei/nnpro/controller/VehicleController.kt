@@ -9,6 +9,7 @@ import org.springframework.dao.EmptyResultDataAccessException
 import org.springframework.http.ResponseEntity
 import org.springframework.orm.jpa.JpaObjectRetrievalFailureException
 import org.springframework.web.bind.annotation.*
+import org.springframework.security.access.prepost.PreAuthorize
 
 @RestController
 @RequestMapping("/api/vehicle")
@@ -17,6 +18,7 @@ class VehicleController(
     @Autowired val vehicleMapper: VehicleMapper
 ) {
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_MODERATOR') or hasRole('ROLE_USER')")
     fun detail(@PathVariable id: Long): ResponseEntity<Any> {
         return try {
             ResponseEntity.ok(vehicleService.getById(id).let(vehicleMapper::toDto))
@@ -26,18 +28,22 @@ class VehicleController(
     }
 
     @GetMapping("/available-vehicles")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_MODERATOR') or hasRole('ROLE_USER')")
     fun listAvailableByCompanyIds(@RequestBody companyIds: List<Long>) =
         vehicleService.getAvailableVehicleForCompanies(companyIds).map(vehicleMapper::toDto)
 
     @GetMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_MODERATOR') or hasRole('ROLE_USER')")
     fun listAll() = vehicleService.getAll().map(vehicleMapper::toDto)
 
     @PostMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     fun save(@RequestBody vehicleDto: VehicleDto) =
         vehicleService.save(vehicleDto.let(vehicleMapper::toModel))
             .let(vehicleMapper::toDto)
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     fun deleteById(@PathVariable id: Long): ResponseEntity<ResponseDto> {
         return try {
             vehicleService.delete(id)
