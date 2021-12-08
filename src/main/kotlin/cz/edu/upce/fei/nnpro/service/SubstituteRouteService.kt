@@ -40,7 +40,7 @@ class SubstituteRouteService(
 
     fun createSubstituteRoute(trainRoute: TrainRoute) {
         save(SubstituteRouteDto(
-            name = "Sub route for ${trainRoute.trainCode}",
+            name = "Sub route for ${trainRoute.trainCode}", validated = false,
             minimalCapacity = trainRoute.capacity, trainRouteId = trainRoute.id,
             sections = trainRoute.sections.map { RouteSectionDto(it.station!!.id, it.routeOrder) }
         ))
@@ -48,7 +48,7 @@ class SubstituteRouteService(
 
     fun getById(id: Long) = substituteRouteRepository.getById(id)
 
-    fun getByTrainRouteId(ids:List<Long>) = substituteRouteRepository.findByTrainRouteIds(ids)
+    fun getByTrainRouteId(ids: List<Long>) = substituteRouteRepository.findByTrainRouteIds(ids)
 
     fun getByIncident(incident: Incident) {
         incident.affectedRail

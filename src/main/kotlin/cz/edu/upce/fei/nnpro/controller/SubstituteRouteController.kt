@@ -34,10 +34,10 @@ class SubstituteRouteController(
     @PostMapping
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     fun save(@RequestBody substituteRouteDto: SubstituteRouteDto): ResponseEntity<Any> {
-        return if (!substituteRouteService.validateVehiclesCapacity(substituteRouteDto)) {
+        return if (substituteRouteDto.validated && !substituteRouteService.validateVehiclesCapacity(substituteRouteDto)) {
             ResponseEntity.status(526)
                 .body(ResponseDto("Vehicles capacity is less than needed!"))
-        } else if (!substituteRouteService.validateVehicleAvailability(substituteRouteDto)) {
+        } else if (substituteRouteDto.validated && !substituteRouteService.validateVehicleAvailability(substituteRouteDto)) {
             ResponseEntity.status(526)
                 .body(ResponseDto("Some of vehicles are already allocated to different sub route!"))
         } else {

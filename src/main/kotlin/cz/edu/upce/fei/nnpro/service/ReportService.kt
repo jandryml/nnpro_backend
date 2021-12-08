@@ -18,8 +18,8 @@ class ReportService(
     @Autowired val substituteRouteService: SubstituteRouteService,
     @Autowired val trainRouteService: TrainRouteService
 ) {
-    fun generateChauffeur(): Report {
-        val data: MutableMap<String, Array<Any>> = generateChauffeurData()
+    fun generateVehicles(): Report {
+        val data: MutableMap<String, Array<Any>> = generateVehiclesData()
         return Report("application/xlsx", generateReport(data))
     }
 
@@ -56,7 +56,7 @@ class ReportService(
     }
 
 
-    private fun generateChauffeurData(): MutableMap<String, Array<Any>> {
+    private fun generateVehiclesData(): MutableMap<String, Array<Any>> {
         val data: MutableMap<String, Array<Any>> = TreeMap()
         val vehicles = vehicleService.getAll()
         data["1"] = arrayOf(

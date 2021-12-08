@@ -19,10 +19,10 @@ class ReportController(
     @Autowired val reportService: ReportService
 ) {
 
-    @GetMapping("/chauffeurs")
+    @GetMapping("/vehicles")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    fun getChauffeursReport(): ResponseEntity<ByteArray> {
-        val fileEntity: Report = reportService.generateChauffeur()
+    fun getVehiclesReport(): ResponseEntity<ByteArray> {
+        val fileEntity: Report = reportService.generateVehicles()
         val header = HttpHeaders()
         header.contentType = MediaType.valueOf(fileEntity.contentType)
         header.contentLength = fileEntity.data.size.toLong()
