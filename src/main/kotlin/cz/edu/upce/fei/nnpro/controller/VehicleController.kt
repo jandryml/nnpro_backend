@@ -6,6 +6,7 @@ import cz.edu.upce.fei.nnpro.mapper.VehicleMapper
 import cz.edu.upce.fei.nnpro.service.VehicleService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.dao.EmptyResultDataAccessException
+import org.springframework.data.repository.query.Param
 import org.springframework.http.ResponseEntity
 import org.springframework.orm.jpa.JpaObjectRetrievalFailureException
 import org.springframework.web.bind.annotation.*
@@ -29,7 +30,7 @@ class VehicleController(
 
     @GetMapping("/available-vehicles")
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_MODERATOR') or hasRole('ROLE_USER')")
-    fun listAvailableByCompanyIds(@RequestBody companyIds: List<Long>) =
+    fun listAvailableByCompanyIds(@RequestParam companyIds: List<Long>) =
         vehicleService.getAvailableVehicleForCompanies(companyIds).map(vehicleMapper::toDto)
 
     @GetMapping
